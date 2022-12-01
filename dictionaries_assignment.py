@@ -55,7 +55,7 @@ index = 0
 
 # since all of the lists are the same length, we can use the index
 for name in employee_names:
-    database.append({ 'id': employee_ids[index], 'name': name, 'salary': employee_salaries[index], 'total_hourly_rate': total_hourly_rate[index] })
+    database.append({ 'id': employee_ids[index], 'name': name, 'salary': employee_salaries[index], 'total_hourly_rate': total_hourly_rate[index], 'raise': company_raises[index] })
 
     index = index + 1 # increment the index so we don't get duplicate data
 

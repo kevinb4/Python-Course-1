@@ -7,11 +7,12 @@ while cont:
     id_ok = False
 
     while not id_ok:
-        if not id:
+        if not id: # no user entry
             id_ok = False
         else:
-            if id.isdigit():
-                if len(id) < 7:
+            if id.isdigit(): # make sure input is a valid number
+                if len(id) <= 7: # make sure it's 7 or less digits
+                    id = int(id) # must be a number (integer)
                     id_ok = True
                 else:
                     id_ok = False
@@ -25,12 +26,18 @@ while cont:
     name_ok = False
 
     while not name_ok:
+        # setup custom char filter - add numbers since a name cannot contain numbers because using isalpha would return false if the user has a period in their name, which isn't on the special characters list
+        bad_name_chars = ['!', '"', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '=', '+', ',', '<', '>', '/', '?', ';', ':', '[', ']', '{' '}', '\\',
+                          '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+
         if name:
-            if name.isalpha():
-                name_ok = True
-            else:
-                name_ok = False
-        else:
+            for char in name:
+                if char in bad_name_chars:
+                    name_ok = False
+                    break # stop if a bad char is found or else it could be set to true from the next char
+                else:
+                    name_ok = True
+        else: # no user entry
             name_ok = False
 
         if not name_ok:
@@ -41,7 +48,7 @@ while cont:
     email_ok = False
 
     while not email_ok:
-        # setup bad char list since we have not been introducted to a python function that will check for all special chars except @
+        # setup custom char filter
         bad_email_chars = ['!', '"', '\'', '#', '$', '%', '^', '&', '*', '(', ')', '=', '+', ',', '<', '>', '/', '?', ';', ':', '[', ']', '{', '}', '\\']
 
         if email:
@@ -51,7 +58,7 @@ while cont:
                     break # stop if a bad char is found or else it could be set to true from the next char
                 else:
                     email_ok = True
-        else:
+        else: # no user entry
             email_ok = False
 
         if not email_ok:
@@ -62,11 +69,11 @@ while cont:
     address_ok = False
 
     while not address_ok:
-        if not address:
+        if not address: # to skip address
             address_ok = True
         else:
-            # setup bad char list since we have not been introducted to a python function that will check for all special chars except a few
-            bad_address_chars = ['!', '"', '\'', '$', '%', '^', '&', '*', '=', '+', '<', '>', '?', ';', ':', '[', ']', '{', '}']
+            # setup custom char filter
+            bad_address_chars = ['!', '"', '\'', '@', '$', '%', '^', '&', '*', '_', '=', '+', '<', '>', '?', ';', ':', '[', ']', '{', '}']
 
             for char in address:
                 if char in bad_address_chars:
