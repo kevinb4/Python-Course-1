@@ -1,15 +1,15 @@
-def bad_char_check(passed_input, type):
+def bad_char_check(passed_input, data_type):
     passed = False
     list = []
 
-    if type == "name":
+    if data_type == "name":
         # setup custom char filter - add numbers since a name cannot contain numbers because using isalpha would return false if the user has a period in their name, which isn't on the special characters list
         list = ['!', '"', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '=', '+', ',', '<', '>', '/', '?', ';', ':', '[', ']', '{' '}', '\\',
                           '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-    elif type == "email":
+    elif data_type == "email":
         # setup custom char filter
         list = ['!', '"', '\'', '#', '$', '%', '^', '&', '*', '(', ')', '=', '+', ',', '<', '>', '/', '?', ';', ':', '[', ']', '{', '}', '\\']
-    elif type == "address":
+    elif data_type == "address":
         # setup custom char filter
         list = ['!', '"', '\'', '@', '$', '%', '^', '&', '*', '_', '=', '+', '<', '>', '?', ';', ':', '[', ']', '{', '}']
     else: # this shouldn't happen but it's good to have a safety net
@@ -25,11 +25,11 @@ def bad_char_check(passed_input, type):
             
     return passed
 
-def get_data(type):
-    msg = f"Please enter your employee {type}"
+def get_data(data_type):
+    msg = f"Please enter your employee {data_type}"
 
     # inform the user address is optional when prompted
-    if type == "address":
+    if data_type == "address":
         msg = f"{msg} (optional): "
     else:
         msg = f"{msg}: "
@@ -38,20 +38,20 @@ def get_data(type):
     data_ok = False
 
     while not data_ok:
-        if not data and type != "address": # handle nothing entered as long as it's not the address
+        if not data and data_type != "address": # handle nothing entered as long as it's not the address
             data_ok = False
-        elif not data and type == "address": # handle the optional address
+        elif not data and data_type == "address": # handle the optional address
             data_ok = True
-        elif type == "id": # special handler for id since it doesn't use the char checker
+        elif data_type == "id": # special handler for id since it doesn't use the char checker
             if data.isdigit() and len(data) <= 7: # make sure input is a valid number and that it's 7 or less digits
                 data_ok = True
             else:
                 data_ok = False
         else:
-            data_ok = bad_char_check(data, type)
+            data_ok = bad_char_check(data, data_type)
 
         if not data_ok:
-            data = input(f"The {type} you entered is not valid, please enter characters only used in a {type}: ")
+            data = input(f"The {data_type} you entered is not valid, please enter characters only used in a {data_type}: ")
 
     return data
 
