@@ -1,23 +1,23 @@
 def bad_char_check(passed_input, data_type):
     passed = False
-    list = []
+    char_list = []
 
     if data_type == "name":
         # setup custom char filter - add numbers since a name cannot contain numbers because using isalpha would return false if the user has a period in their name, which isn't on the special characters list
-        list = ['!', '"', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '=', '+', ',', '<', '>', '/', '?', ';', ':', '[', ']', '{' '}', '\\',
+        char_list = ['!', '"', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '=', '+', ',', '<', '>', '/', '?', ';', ':', '[', ']', '{' '}', '\\',
                           '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
     elif data_type == "email":
         # setup custom char filter
-        list = ['!', '"', '\'', '#', '$', '%', '^', '&', '*', '(', ')', '=', '+', ',', '<', '>', '/', '?', ';', ':', '[', ']', '{', '}', '\\']
+        char_list = ['!', '"', '\'', '#', '$', '%', '^', '&', '*', '(', ')', '=', '+', ',', '<', '>', '/', '?', ';', ':', '[', ']', '{', '}', '\\']
     elif data_type == "address":
         # setup custom char filter
-        list = ['!', '"', '\'', '@', '$', '%', '^', '&', '*', '_', '=', '+', '<', '>', '?', ';', ':', '[', ']', '{', '}']
+        char_list = ['!', '"', '\'', '@', '$', '%', '^', '&', '*', '_', '=', '+', '<', '>', '?', ';', ':', '[', ']', '{', '}']
     else: # this shouldn't happen but it's good to have a safety net
         print("Failed to get illegal character list")
         return False
 
     for char in passed_input:
-        if char in list:
+        if char in char_list:
             passed = False
             break # stop if a bad char is found or else it could be set to true from the next char
         else:
