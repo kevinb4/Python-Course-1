@@ -13,14 +13,15 @@ class Student(Individual):
 
     def __init__(self, id, name, email, program):
         """Initializes the student class which inherits the individual class"""
+
         super().__init__(id, name, email)
 
         self.program = program
 
     def displayInformation(self):
-        """Returns of all the data in the student class so it can be added to a list"""
+        """Prints of all the data in the student class"""
 
-        return { 'individual_type': 'Student', 'id': self.id, 'name': self.name, 'email': self.email, 'program_of_study': self.program }
+        print(f"Student ID: {self.id}, Name: {self.name}, Email: {self.email}, and Program of Study: {self.program}.")
 
 class Instructor(Individual):
     """Defines the instructor class that inherits from the Individual class"""
@@ -34,9 +35,9 @@ class Instructor(Individual):
         self.highest_degree_earned = highest_degree_earned
 
     def displayInformation(self):
-        """Returns of all the data in the instructor class so it can be added to a list"""
+        """Prints of all the data in the instructor class"""
 
-        return { 'individual_type': 'Instructor', 'id': self.id, 'name': self.name, 'email': self.email, 'institution_graduated': self.institution_graduated, 'highest_degree_earned': self.highest_degree_earned }
+        print(f"Instructor ID: {self.id}, Name: {self.name}, Email: {self.email}, Institution Graduated: {self.institution_graduated}, and the Higest Degree Earned: {self.highest_degree_earned}.")
 
 class Validator():
     """Defines the validator class that will validate user input"""
@@ -152,7 +153,7 @@ while cont:
         student = Student(id, name, email, program)
 
         # append the data to the list using the displayInformation method so the data is readable
-        college_records.append(student.displayInformation())
+        college_records.append(student)
     elif individual == "instructor": # handle instructor's specific information
         institution = get_data("institution graduated", individual)
         degree = get_data("highest degree earned", individual)
@@ -161,11 +162,12 @@ while cont:
         instructor = Instructor(id, name, email, institution, degree)
 
         # append the data to the list using the displayInformation method so the data is readable
-        college_records.append(instructor.displayInformation())
+        college_records.append(instructor)
 
     response = input("Add another individual? (Y/N): ")
     if response.lower() == "n":
         cont = False # we only need to set continue to false since it's already true
 
 # output all of the entries in the list
-print(college_records)
+for record in college_records:
+    record.displayInformation()
